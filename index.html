@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pets-shop</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" type="image/png" />
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" />
+<style>
+
+
+.txt-white {
+    color: #FFF !important;
+}
+
+#wrapper {
+    margin-top: 44px;
+    text-align: center;
+}
+
+.width-100 {
+    width: 80%!important;
+}
+
+#success_message {
+    display: none;
+}
+
+</style>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top"
+        role="navigation" style="margin-bottom: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a id="header-brand-name"
+                    class="navbar-brand text-white" href="/"> <span
+                    class="txt-white" id="appFullName">Pets-shop portal</span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" aria-expanded="false"
+                id="bs-example-navbar-collapse-1"></div>
+        </div>
+    </nav>
+    <div class="loader">
+        <i class="center-loader glyphicon glyphicon-refresh gly-spin"></i>
+    </div>
+    <div id="wrapper">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    <br>
+                        <form class="form-inline" id="logInForm" name="logInForm" method="post" action="controller/LogIn.php">
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="text" class="form-control col-md-8" name="userName" id="userName" placeholder="Enter User Name"/>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="password" class="form-control col-md-8" name="password" id="password" placeholder="Enter Password"/>
+                              </div>
+                            </div>
+                             <!-- Button -->
+                            <div class="form-group">
+                              <div class="col-md-8 inputGroupContainer input-group">
+                              <div class="col-md-4">
+                                <button type="submit" class="btn btn-warning">Log In
+                                <span class="glyphicon glyphicon-send"></span></button>
+                              </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-8 inputGroupContainer input-group">
+                              <div class="col-md-4">
+                                <button type="button" class="btn btn-warning" onclick="showRegisterForm()">Register
+                                <span class="glyphicon glyphicon-plus"></span></button>
+                              </div>
+                              </div>
+                            </div>
+                        </form>
+                        
+                        <form class="form-horizontal" id="registrationForm" name="registrationForm" method="post" action="/controller/regisration.php" style="display: none">
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="text" class="form-control col-md-8" name="name" id="name" placeholder="Enter Your Name"/>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="text" class="form-control col-md-8" name="emailId" id="emailId" placeholder="Enter Email Id"/>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="password" class="form-control col-md-8" name="password" id="password" placeholder="Enter Password"/>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="col-md-12 inputGroupContainer input-group text">
+                                <input type="password" class="form-control col-md-8" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"/>
+                              </div>
+                            </div>
+                             <!-- Button -->
+                            <div class="form-group">
+                              <div class="col-md-8 inputGroupContainer input-group">
+                              <div class="col-md-4">
+                                <button type="submit" class="btn btn-warning">Submit
+                                <span class="glyphicon glyphicon-send"></span></button>
+                              </div>
+                              </div>
+                            </div>
+                        </form>
+                        <form class="well form-horizontal" method="get"  id="petsForm" name="petsForm" style="display: none">
+                                <fieldset>
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label">Pets available: <span class="asterisk">*</span></label>  
+                                        <div class="col-md-4 inputGroupContainer input-group text">
+                                             <select name="pets" id="pets" class="form-control">
+                                              <option value="Cat" >Cat</option>
+                                              <option value="Birds" >Birds</option>
+                                              <option value="Fish" >Fish</option>
+                                             </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label">Costs: <span class="asterisk">*</span></label>  
+                                        <div class="col-md-4 inputGroupContainer input-group text">
+                                             <select name="costs" id="costs" class="form-control">
+                                              <option value="40" >40</option>
+                                              <option value="100" >100</option>
+                                              <option value="80" >80</option>
+                                             </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label">How many would you like to have: <span class="asterisk">*</span></label>  
+                                        <div class="col-md-4 inputGroupContainer input-group text">
+                                           <input name="petsNumber" id="petsNumber" class="form-control"  type="text" />
+                                      </div>
+                                    </div>
+                                    <!-- Button -->
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label"></label>
+                                      <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary">Purchase</button>
+                                      </div>
+                                    </div>
+                            </fieldset>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function showRegisterForm(){
+            $('#logInForm').hide();
+            $('#registrationForm').show();
+        };
+     $(document).ready(function() {
+        
+        $('#registrationForm').bootstrapValidator({
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        'name': {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Please enter your name'
+                                },
+                                regexp: {
+                                    regexp: /^[a-zA-Z \.]+$/,
+                                    message: 'your name can only consist of alphabetical and/or dot symbol.'
+                                }
+                            }
+                        },
+                        'emailId': {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Email address is empty.'
+                                },
+                                regexp: {
+                                    regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                    message: 'Please enter complete email address.'
+                                },
+                                emailAddress: {
+                                    message: 'Please enter a valid email address'
+                                }
+                            }
+                        }      
+                    }
+                })
+                .on('success.form.bv', function(e){
+                    $('#registrationForm').data('bootstrapValidator').resetForm();
+                    e.preventDefault();
+                    $.post($form.attr('action'), $form.serialize(), function(result) {
+                        console.log(result);
+            }, 'json');
+                });
+        $('#loginForm').bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please enter your user name'
+                            },
+                      }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+               $('#loginForm').data('bootstrapValidator').resetForm();
+                $('#loginForm').hide();
+                $('#petsForm').show();
+            e.preventDefault();
+            var $form = $(e.target);
+           
+            // Use Ajax to submit form data
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                var formElements = ['pets','cost'];
+                $.each(formElements, function(index, value) {
+                    var element = $('#'+value);
+                        $('#'+value).val(result[value]);
+                    });
+            }, 'json');
+        });
+     });
+
+    
+</script>
+
+</html>
